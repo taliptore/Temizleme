@@ -1,0 +1,125 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@using Umbraco.Cms.Core.Models
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Content= Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent
+@{
+    var slide = Model.AncestorOrSelf<ContentModels.Home>();
+
+
+
+}
+
+
+<div class="hero">
+
+    <ul id="slide" class="slide-list">
+
+        <li>
+            @{
+                var link1 = slide.SlideUrl1;
+            }
+            @if (link1.Name=="video")
+            {
+                <div class="slide-material slide-video">
+                    <video preload="auto" autoplay loop playsinline data-wf-ignore="true" muted="true">
+                        <source type="video/mp4" src="~/@link1.Url" />
+                    </video>
+                </div>
+            }else
+            {
+                <div class="slide-material slide-photo">
+                    <div style="background-image: url('@link1.Url')"></div>
+                </div>
+            }
+            
+            <div class="slide-wrapper">
+                <div class="slide-container container">
+                    <div class="slide-content">
+                        <div class="heading">@slide.SlideBaslik1</div>
+                        <div class="text">@slide.SlideAciklama1</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+
+        <li>
+            @{
+                var link2 = slide.SlideUrl1;
+            }
+            @if (link2.Name == "video")
+            {
+                <div class="slide-material slide-video">
+                    <video preload="auto" autoplay loop playsinline data-wf-ignore="true" muted="true">
+                        <source type="video/mp4" src="~/@link2.Url" />
+                    </video>
+                </div>
+            }
+            else
+            {
+                <div class="slide-material slide-photo">
+                    <div style="background-image: url('@link2.Url')"></div>
+                </div>
+            }
+
+           
+            <div class="slide-wrapper">
+                <div class="slide-container container">
+                    <div class="slide-content">
+                        <div class="heading">@slide.SlideBaslik2</div>
+                        <div class="text">>@slide.SlideAciklama2</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+
+    <div class="hero-info">
+        <div class="container">
+            <ul class="row ui-gutter">
+                <li class="col-lg-3 col-sm-12 col-md-3">
+                    <a>
+                        <h4 class="title ui-large">Tıbbi Tavsiyeler Ve Kontroller</h4>
+                    </a>
+                </li>
+
+
+                <li class="col-md-3 col-sm-4">
+                    <a href="Hekimler">
+                        <div class="icon">
+                            <img src="~/uploads/sayfalar/c65e9_w300d7b3.jpg?p=uploads/sayfalar/c65e9.jpg&amp;w=300" alt="Alanında Profesyonel Uzman Hekimler">
+                        </div>
+                        <h4 class="title">Alanında Profesyonel Uzman Hekimler</h4>
+                        <div class="text"></div>
+                    </a>
+                </li>
+
+
+                <li class="col-md-3 col-sm-4">
+                    <a href="Tedaviler">
+                        <div class="icon">
+                            <img src="~/uploads/sayfalar/51892_w3009c59.jpg?p=uploads/sayfalar/51892.jpg&amp;w=300" alt="Güncel Tedavi Yöntemleri">
+                        </div>
+                        <h4 class="title">Güncel Tedavi Yöntemleri</h4>
+                        <div class="text"></div>
+                    </a>
+                </li>
+
+
+                <li class="col-md-3 col-sm-4">
+                    <a href="Tedaviler">
+                        <div class="icon">
+                            <img src="~/uploads/sayfalar/5f5e8_w300654a.jpg?p=uploads/sayfalar/5f5e8.jpg&amp;w=300" alt="Teknolojik Ekipmanlar">
+                        </div>
+                        <h4 class="title">Teknolojik Ekipmanlar</h4>
+                        <div class="text"></div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

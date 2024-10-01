@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    Layout = "master.cshtml";
+  
+}
+
+
+@await Html.PartialAsync("Hero")
+
+@await Html.PartialAsync("Hizmetler")
+
+@await Html.PartialAsync("service")
+
+@await Html.PartialAsync("personnel")
+
+@await Html.PartialAsync("Yorum")
+
+@await Html.PartialAsync("blogPartial")
+
+@await Html.PartialAsync("modalPartial")
+
+@if (Model.ContentRows != null)
+{
+    <article>
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    @Html.GetBlockListHtml(Model.ContentRows)
+                </div>
+            </div>
+        </div>
+    </article>
+}

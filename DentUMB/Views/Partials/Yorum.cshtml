@@ -1,0 +1,84 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Content= Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@{
+    var homePage = Model.AncestorOrSelf<ContentModels.Home>();
+
+
+    var Yorumlar = Model.Children().Where(x => x.Name == "Yorumlar");
+    // foreach (var block in Yorumlar)
+    // {
+    //     var content = block.Children;
+    //     foreach (var item in content)
+    //     {
+    //         var veri = item;
+    //     }
+    // }
+
+
+}
+   <section class="section-comments">
+    <div class="shape"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#B69134" d="M36.7,-52.4C49.2,-41.5,62.1,-32.9,67.6,-20.8C73.1,-8.8,71.1,6.9,68,23.8C64.8,40.7,60.5,59,48.9,71.2C37.4,83.5,18.7,89.7,2.9,85.8C-13,81.9,-26,67.8,-41.6,56.8C-57.2,45.9,-75.5,38.2,-84.7,24.2C-93.8,10.1,-94,-10.2,-87.2,-27.5C-80.5,-44.8,-66.9,-59.1,-51.2,-69C-35.5,-78.9,-17.8,-84.4,-2.8,-80.5C12.1,-76.7,24.2,-63.3,36.7,-52.4Z" transform="translate(100 100)" />
+        </svg></div>
+    <div class="container">
+        <div class="section-header ui-txt-between ui-mb-70px">
+            <h4 class="title">Buradan ayrılırken mutlulukla <br> <span>gülümsediğinizi görmek</span></h4>
+            <div class="desc">
+                <div class="heading">Hasta Yorumları</div>
+                <div class="text">Bizi hastalarımızın yorumlarıyla daha yakından tanıyın ve detaylı bilgiler için bizimle iletişime geçmekten çekinmeyin.</div>
+            </div>
+        </div>
+    </div>
+    <div class="comments comments-carousel js-comments-carousel is-owl owl-nav-style bottom-right">
+        <div class="owl-carousel owl-comments owl-theme">
+ 
+
+            @{
+                foreach (var block in Yorumlar)
+                {
+                    var content = block.Children;
+                    foreach (Article item in content)
+                    {
+                        <div class="item">
+                            <div class="comments-card js-btn-modalcomment is-open">
+                                <div class="heading">
+                                    <h4 class="title js-get-helptitle">@item.Name</h4>
+                                    <div class="icon"><i class="fas fa-quote-left"></i></div>
+                                </div>
+                                <div class="stars">
+                                  
+                                    <div class="star"><i class="fas fa-star"></i></div>
+                                    <div class="star"><i class="fas fa-star"></i></div>
+                                    <div class="star"><i class="fas fa-star"></i></div>
+                                    <div class="star"><i class="fas fa-star"></i></div>
+                                    <div class="star"><i class="fas fa-star"></i></div>
+                                </div>
+                                <div class="text js-get-comment">
+                                    <p>@item.Title @item.Subtitle</p>
+                                </div>
+
+                                <div class="text js-get-comment">
+                                    <h1 class="title js-get-helptitle">@item.Categories.First().Name</h1>
+                                     
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            
+
+
+
+
+
+
+
+        </div>
+    </div>
+</section>

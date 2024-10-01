@@ -1,0 +1,104 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@{
+    var homePage = Model.AncestorOrSelf<ContentModels.Home>();
+
+    string FirmaAdi = Model.Value<string>("metaDescription");
+    var imageCropperValue = homePage.LogoFooter;
+    var submitted = false;
+    if (bool.TryParse(TempData["Success"]?.ToString() ?? "", out var success))
+    {
+        submitted = true;
+    }
+}
+
+<section class="section-appointment">
+    <div class="container">
+        <div class="appointment">
+            <div class="row ui-gutter-15">
+                <div class="col-md-4">
+                    <div class="appointment-card">
+                        <div class="appointment-cover">
+                            <img src="@imageCropperValue" alt="@FirmaAdi">
+                        </div>
+                        <div class="appointment-body">
+                            <a href="tel:@homePage.Telefon" class="contact">
+                                <div class="icon">
+                                    <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-phone-volume">
+                                        <path fill="currentColor" d="M154.9 187.8c14.7 1.5 28.7-7 34.2-20.7l32.5-81c6-14.9.4-31.9-13.3-40.5l-65-40.5c-13.2-8.2-30.1-6.3-41.1 4.7C-34.3 146-34 366.4 102.2 502.3c11 11 27.9 12.9 41.1 4.7l65-40.5C222 458 227.5 441 221.6 426l-32.5-81c-5.5-13.6-19.5-22.1-34.2-20.7l-43.2 4.3c-14.5-47.2-14.5-97.9 0-145.1zM89.8 362.9l68.4-6.8c.5-.1 1 .2 1.2.7l32.5 81c.2.5 0 1.1-.5 1.4l-65 40.5c-.5.3-1.1.2-1.5-.2C1 356 1.1 155.9 124.9 32.4c.4-.4 1-.5 1.5-.2l65 40.5c.5.3.7.9.5 1.4l-32.5 81c-.2.5-.7.8-1.2.7L89.8 149c-28.7 79.1-27.6 137.9 0 213.9zm202.4-270l-6 5.7c-3.9 3.7-4.8 9.6-2.3 14.4 4.9 9.4 4.9 20.6 0 29.9-2.5 4.8-1.6 10.7 2.3 14.4l6 5.7c5.6 5.4 14.8 4.1 18.7-2.6 11.8-20 11.8-45 0-65.1-3.9-6.5-13-7.8-18.7-2.4zM357 49.2c-4.4-5.6-12.7-6.3-17.9-1.3l-5.8 5.6c-4.4 4.2-5 11.1-1.3 15.9 26.5 34.6 26.5 82.6 0 117.1-3.7 4.8-3.1 11.7 1.3 15.9l5.8 5.6c5.2 4.9 13.5 4.3 17.9-1.3 36.1-46.2 36.1-111.1 0-157.5zm45.9-44.9c-4.5-5.3-12.5-5.7-17.6-.9L379.5 9c-4.6 4.4-5 11.5-.9 16.4 49.7 59.5 49.6 145.9 0 205.4-4 4.8-3.6 12 .9 16.4l5.8 5.6c5 4.8 13.1 4.4 17.6-.9 60.2-71.8 60.1-176.1 0-247.6z" class=""></path>
+                                    </svg>
+                                </div>
+                                <div class="desc">
+                                    <h4 class="title">Şimdi Ara</h4>
+                                    <div class="number">@homePage.Telefon</div>
+                                </div>
+                            </a>
+                            <div class="text">Tarafımıza soru talebinizi oluşturup size geri dönüş yapmamızı bekleyiniz. İlginiz için teşekkürler.</div>
+                            <a href="iletisim.html" class="button">İletişim</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="appointment-form">
+                        <div class="heading ui-mb-30px">
+                            <h4 class="title">Randevu Al</h4>
+                            <div class="text">Tarafımıza soru talebinizi oluşturup size geri dönüş yapmamızı bekleyiniz. İlginiz için teşekkürler.</div>
+                        </div>
+                        @* @if (submitted)
+                        {
+
+                            @if (success)
+                            {
+                                @Model.SuccessMessage
+                            }
+                            else
+                            {
+                                @Model.ErrorMessage
+                            }
+                        }
+                        else
+                        { *@
+                            @* @Model.InstructionMessage *@
+                          
+                             @*    @await Component.InvokeAsync("Contact") *@
+
+                        <div class="form">
+                            <form id="FormAppointment">
+                                <ul class="row">
+                                    <li class="ui-d-none not js-form-item">
+                                        <input class="js-form-item-invalid" type="text" name="user_ip" id="user_ip" value="212.253.91.136" readonly="">
+                                    </li>
+                                    <li class="form-field col-sm-12 js-form-item">
+                                        <input type="text" name="user_name" placeholder="Adınız &amp; Soyadınız">
+                                    </li>
+                                    <li class="form-field col-sm-12 js-form-item">
+                                        <input class="js-form-special js-form-email" type="text" name="user_email" placeholder="E-posta Adresiniz">
+                                    </li>
+                                    <li class="form-field col-sm-12 js-form-item">
+                                        <input class="js-form-special js-form-phone" type="text" name="user_phone" placeholder="Telefon Numaranız">
+                                    </li>
+
+                                    <li class="form-kvkk col-lg-6 js-form-item">
+                                        <label class="checkbox js-form-item ui-mt-10px">
+                                            <input class="js-form-checkbox" type="checkbox" name="user_privacy">
+                                            <span class="checkbox"><span></span></span>
+                                            <span class="text"><a href="kvkk.html" target="_blank">Kvkk ve Aydınlatma Metni </a> 'ni okudum ve onaylıyorum. </span>
+                                        </label>
+                                    </li>
+                                    <li class="form-send col-lg-6 js-form-item">
+                                        <input type="submit" name="user_send" value="Randevu Al">
+                                    </li>
+                                </ul>
+                                <div class="loading js-form-loading"></div>
+                            </form>
+                        </div>
+
+                        @* } *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

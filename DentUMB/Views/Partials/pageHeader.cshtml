@@ -1,0 +1,79 @@
+﻿@inherits UmbracoViewPage<Clean.Core.Models.ViewModels.PageHeaderViewModel>
+
+@{
+    string mainImageUrl = Model.HasBackgroundImage ? Model.BackgroundImage.GetCropUrl(1903, 628) : "/media/f01jqvmq/2.jpg";
+    var rootNode = Umbraco.ContentAtRoot().FirstOrDefault();  
+     string homePageUrl = rootNode.Url();
+
+ 
+}
+
+
+<header class="masthead" style="background-image: url('@mainImageUrl')">
+
+    <div class="inner-page__header" >
+        <div class="inner-page__photo ui-color-1"></div>
+        <div class="inner-page__heading" style="background-image: url('@mainImageUrl')">
+            <div class="container ui-between">
+                <div class="left @(Model.ArticleDate.HasValue ? "post-heading" : "site-heading")">
+                    <div class="inner-page__heading-left">
+                        <h2 class="title ui-large">@(!string.IsNullOrWhiteSpace(Model.Title) ? Model.Title : Model.Name)</h2>
+
+                        @if (Model.IsArticle)
+                        {
+                            if (Model.HasSubtitle)
+                            {
+                                @* <h2 class="subheading mb-4">@Model.Subtitle</h2> *@
+                                <div class="subheading " style="color:wheat">@Model.Subtitle.</div>
+                            }
+                            <span class="meta">
+                                Posted
+                                @if (Model.HasAuthor)
+                                {
+                                    @Umbraco.GetDictionaryValue("Article.By")
+
+                                    @Html.Raw("&nbsp;")
+
+                                    @Model.AuthorName
+                                }
+                                @Umbraco.GetDictionaryValue("Article.On")@Html.Raw("&nbsp;")@Model.ArticleDate.Value.ToString("MMMM dd, yyyy")
+                            </span>
+                            @if (Model.Categories != null && Model.Categories.Any())
+                            {
+                                <span class="mt-4 d-block"></span>
+                                @foreach (var category in Model.Categories.Select(x => x.Name).OrderBy(y => y))
+                                {
+                                    <span class="badge rounded-pill bg-light text-dark border-dark border-5">@category</span>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (Model.HasSubtitle)
+                            {
+                                <span class="subheading ui-large">@(Model.Subtitle)</span>
+                            }
+                        }
+                        
+                    </div>
+                    <div class="breadcrumb">
+                        <ul class="ui-d-flex">
+                            <li>
+                                <a class="not" href="@homePageUrl">
+                                    <span class="icon">
+                                        <svg role="icon" viewBox="0 0 576 512" class="svg-inline--fa fa-home">
+                                            <path fill="currentColor" d="M570.24 247.41L512 199.52V104a8 8 0 0 0-8-8h-32a8 8 0 0 0-7.95 7.88v56.22L323.87 45a56.06 56.06 0 0 0-71.74 0L5.76 247.41a16 16 0 0 0-2 22.54L14 282.25a16 16 0 0 0 22.53 2L64 261.69V448a32.09 32.09 0 0 0 32 32h128a32.09 32.09 0 0 0 32-32V344h64v104a32.09 32.09 0 0 0 32 32h128a32.07 32.07 0 0 0 32-31.76V261.67l27.53 22.62a16 16 0 0 0 22.53-2L572.29 270a16 16 0 0 0-2.05-22.59zM463.85 432H368V328a32.09 32.09 0 0 0-32-32h-96a32.09 32.09 0 0 0-32 32v104h-96V222.27L288 77.65l176 144.56z" class=""></path>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a>@(!string.IsNullOrWhiteSpace(Model.Title) ? Model.Title : Model.Name)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+

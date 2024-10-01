@@ -1,0 +1,94 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Content= Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@{
+    var homePage = Model.AncestorOrSelf<ContentModels.Home>();
+
+    var root = Model.Root();
+    var Hekimler = Model.Children().Where(x => x.Name == "Hekimler");
+    // foreach (var block in Hekimler)
+    // {
+         
+    // }
+
+    var currentPage = UmbracoContext.PublishedRequest.PublishedContent;
+
+    // Eğer sayfa root düğümdeyse ana sayfa olarak kabul edilir
+    bool isHomePage = currentPage.Parent == null;
+
+    
+ 
+
+}
+
+
+
+<section class="section-personnel">
+    <div class="container">
+        <div class="section-header ui-txt-light ui-txt-between ui-right-large ui-mb-100px">
+            <h4 class="title">Alanında Uzman <br> <span>Hekimlerimiz</span> </h4>
+            <a href="@Hekimler.First().Name" class="button">Tüm Hekimler</a>
+        </div>
+        <div class="personnel ui-top">
+            <div class="personnel-carousel js-personnel-carousel is-owl owl-nav-style top-right">
+                <div class="owl-carousel owl-personnel owl-theme">
+
+                    @{
+                        foreach (var block in Hekimler)
+                        {
+                            var content = block.Children;
+                            foreach (Article item in content)
+                            {
+                                var kapakResmi = item.MainImage as MediaWithCrops;
+                                string kate = "";
+                                foreach (var cat in item.Categories)
+                                {
+                                    kate += cat.Name;
+                                }
+
+                                <div class="item">
+                                    <a href="@block.Name/@item.UrlSegment">
+                                        <div class="personnel-card">
+                                            <div class="personnel-photo">
+                                                @if (kapakResmi is not null)
+                                                {
+                                                    <img src="@kapakResmi.Url()">
+                                                }
+                                                else
+                                                {
+                                                    <img src="uploads/birimler/f793a.jpg">
+                                                }
+
+
+                                            </div>
+                                            <div class="personnel-body">
+                                                <h4 class="title">@item.Title</h4>
+                                                <div class="text">@kate</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            }
+                        }
+                    }
+
+                  
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+    
+
+    

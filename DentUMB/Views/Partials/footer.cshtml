@@ -1,0 +1,129 @@
+﻿@inherits UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var homePage = Model.AncestorOrSelf<ContentModels.Home>();
+    var imageCropperValue = homePage.LogoFooter;
+    string FirmaAdi = Model.Value<string>("metaDescription");
+
+    
+    
+
+    var Tedaviler = Model.Children().Where(x => x.Name == "Tedaviler");
+    // foreach (var block in Tedaviler)
+    // {
+    //     var content = block.Children;
+    //     foreach (var item in content)
+    //     {
+    //         var veri = item;
+    //     }
+    // }
+}
+
+<footer class="footer">
+                    <div class="footer-top">
+                        <div class="container">
+                            <div class="row ui-gutter">
+                                <div class="col-lg-3 col-md-4">
+                                    <div class="footer-first">
+                                        <div class="footer-logo">
+                                            <h1>
+                                                <a href="index-2.html">
+                                    <img src="@imageCropperValue" alt="@FirmaAdi">
+                                                </a>
+                                            </h1>
+                                        </div>
+                                        <div class="footer-info">@FirmaAdi</div>
+                                        <div class="footer-social">
+                                                @if (homePage.SocialIconLinks != null && homePage.SocialIconLinks.Any())
+                                                {
+                                
+                                                         <ul class="list-inline text-center">
+                                                        @Html.GetBlockListHtml(homePage.SocialIconLinks)
+                                                        </ul>
+                                
+                                                }
+                          
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-8">
+                                    <div class="row no-gutters">
+                                        <div class="col-sm-4 ui-mobile">
+                                            <div class="footer-links">
+                                                <div class="heading">HIZLI MENU</div>
+                                <div class="navigation-item">
+                                    
+                                </div>
+                                
+                                                <ul>
+                                                   
+                                    @foreach (var page in homePage.Children.Where(x => !x.Value<bool>("hideFromTopNavigation")))
+                                    {
+
+                                        <li><a href="@(page.Url())">@(page.Name)</a></li>
+
+
+                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 ui-mobile">
+                                            <div class="footer-links">
+                                                <div class="heading">TEDAVİLER</div>
+
+                                                  <ul>
+
+                                    @foreach (var block in homePage.Children.Where(x => x.Name == "Tedaviler"))
+                                    {
+                                        var content = block.Children;
+                                        foreach (var item in content)
+                                        {
+                                            <li><a href="@block.Name/@item.UrlSegment">@item.Name</a></li>
+                                        }
+                                        <li><a href="@(block.Url())">@(block.Name)</a></li>
+
+
+                                    }
+
+                                                
+                                                
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                 
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="footer-last">
+                                        <div class="heading">İletişim Bilgilerimiz</div>
+                                        <div class="footer-contact">
+                                            <a href="@homePage.MapLinkUrl" target="_blank">@homePage.Adres </a>
+                            <a href="tel:@homePage.Telefon" class="phone">@homePage.Telefon</a>
+                                            <a href="mailto:@homePage.Eposta" class="mail">@homePage.Eposta</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <div class="container">
+            <div class="text">@Umbraco.GetDictionaryValue("Footer.CopyrightTitle") &copy; @DateTime.Now.Year @Umbraco.GetDictionaryValue("Footer.CopyrightStatement")</div>
+            <div class="text"><a href="@Umbraco.GetDictionaryValue("Footer.CopyrightTitle")" target="_blank">Design by <strong>@Umbraco.GetDictionaryValue("Footer.CopyrightStatement")</strong></a></div>
+                        </div>
+                    </div>
+  
+                </footer>
+<!-- Footer-->
+
+<button class="scrolltop js-btn-scroll" aria-controls="ScrollTop">
+    <span class="icon"><i class="fas fa-chevron-up"></i></span>
+</button>
+
+<a class="whatsapp js-wp" href="https://wa.me/@homePage.Whatsapp" target="_blank">
+    <span class="icon"><i class="fab fa-whatsapp"></i></span>
+</a>
+

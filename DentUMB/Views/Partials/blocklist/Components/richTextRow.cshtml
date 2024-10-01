@@ -1,0 +1,202 @@
+﻿@inherits UmbracoViewPage<BlockListItem>
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+
+@{
+    var row = Model.Content as RichTextRow;
+    var settings = Model.Settings as RichTextRowSettings;
+    if (settings?.Hide ?? false) { return; }
+
+
+    var currentPage = UmbracoContext.PublishedRequest.PublishedContent as Article;
+  
+  
+  
+  
+
+
+    // var articleLists = Umbraco.ContentAtXPath("//articleList");
+
+    // if (articleLists != null)
+    // {
+    //     <ul>
+    //         @foreach (var articleList in articleLists)
+    //         {
+    //             <li>
+    //                 <a href="@articleList.Url()">@articleList.Name</a>
+    //             </li>
+    //         }
+    //     </ul>
+    // }
+
+    var spacingClasses = "";
+    if (Model.Settings is ISpacingProperties spacing)
+    {
+        spacingClasses = Clean.Core.Helpers.SpacingHelper.GetSpacingClasses(spacing.PaddingTop, spacing.PaddingBottom, spacing.PaddingLeft, spacing.PaddingRight, spacing.MarginTop, spacing.MarginBottom, spacing.MarginLeft, spacing.MarginRight);
+    }
+
+ 
+}
+
+<div class="row clearfix @(spacingClasses)">
+    <div class="col-md-12 column">
+    <div class="inner-page__wrapper">
+        <div class="container">
+
+            <div class="inner-page__row row gutter">
+
+
+
+                <div class="inner-page__sidebar">
+
+                    <div class="sidebar-nav js-page-current">
+                            <ul>
+                                @{
+                                    if (currentPage is not null)
+                                    {
+                                        var konular = currentPage.Parent;
+
+                                        if (konular is not null)
+                                        {
+                                            foreach (Article item in konular.Children)
+                                            {
+
+
+                                                <li>
+                                                    <a href="@item.Url()">
+                                                        @item.Title <span class="icon">
+                                                            <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-right">
+                                                                <path fill="currentColor" d="M218.101 38.101L198.302 57.9c-4.686 4.686-4.686 12.284 0 16.971L353.432 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h341.432l-155.13 155.13c-4.686 4.686-4.686 12.284 0 16.971l19.799 19.799c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L235.071 38.101c-4.686-4.687-12.284-4.687-16.97 0z" class=""></path>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                }
+                      
+
+                          
+                        
+
+                        </ul>
+                    </div>
+
+
+
+                    <div class="sidebar-hours js-page-current">
+                        <div class="heading">Çalışma Saatlerimiz</div>
+                        <ul>
+                            <li>
+                                <div>
+                                    <div class="icon"><i class="fas fa-angle-right"></i></div>
+                                    <h4 class="title">Pazartesi</h4>
+                                </div>
+                                <div>
+                                    <div class="hours">10:00 - 19:00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="icon"><i class="fas fa-angle-right"></i></div>
+                                    <h4 class="title">Salı</h4>
+                                </div>
+                                <div>
+                                    <div class="hours">10:00 - 19:00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="icon"><i class="fas fa-angle-right"></i></div>
+                                    <h4 class="title">Çarşamba</h4>
+                                </div>
+                                <div>
+                                    <div class="hours">10:00 - 19:00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="icon"><i class="fas fa-angle-right"></i></div>
+                                    <h4 class="title">Perşembe</h4>
+                                </div>
+                                <div>
+                                    <div class="hours">10:00 - 19:00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="icon"><i class="fas fa-angle-right"></i></div>
+                                    <h4 class="title">Cuma</h4>
+                                </div>
+                                <div>
+                                    <div class="hours">10:00 - 19:00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="icon"><i class="fas fa-angle-right"></i></div>
+                                    <h4 class="title">Cumartesi</h4>
+                                </div>
+                                <div>
+                                    <div class="hours">10:00 - 15:00</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="icon"><i class="fas fa-angle-right"></i></div>
+                                    <h4 class="title">Pazar</h4>
+                                </div>
+                                <div>
+                                    <div class="hours">KAPALI</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="inner-page__article">
+                    <div class="inner-page__content">
+
+                        <div class="page-content__photo ui-large">
+
+                                @{
+                                    if (currentPage is not null)
+                                    {
+                                        var kapakResmi = currentPage.MainImage as MediaWithCrops;
+                                    if (kapakResmi is not null)
+                                    {
+                                        <img src="@kapakResmi.Url()" alt="@currentPage.Title">
+                                    }else
+                                    {
+                                        <img src="uploads/sayfalar/282b4_w1000d35a.jpg?p=uploads/sayfalar/282b4.jpg&amp;w=1000" alt="@currentPage.Title">
+                                    }
+                                    }
+                            }
+
+                            
+                        </div>
+
+                        <div class="page-content__description">
+                                @row.Content
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+ 
