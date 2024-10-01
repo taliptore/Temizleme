@@ -30,8 +30,12 @@
 
 
 }
-
-   <section class="section-treatments">
+@{
+    if (Tedaviler.Count()>0)
+    {
+        
+    
+         <section class="section-treatments">
     <div class="container">
         <div class="section-header ui-txt-light ui-txt-between ui-right ui-mb-50px">
             <h4 class="title">Kuzey Ağız ve Diş <br> <span>Kliniği Tedaviler</span></h4>
@@ -120,3 +124,6 @@
         </div>
     </div>
 </section>
+
+    }
+}

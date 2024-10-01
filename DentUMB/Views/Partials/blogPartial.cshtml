@@ -34,54 +34,57 @@
 
 
 }
+@{
+    if (Blog.Count() > 0)
+    {
 
- <section class="section-blog">
-    <div class="container">
-        <div class="section-header ui-txt-center ui-mb-50px">
-            <h4 class="title">Sağlıklı Dişler <br> <span>Mutlu Gülüşler</span></h4>
-        </div>
-        <div class="blog">
-            <div class="blog-carousel js-blog-carousel is-owl owl-nav-style">
-                <div class="owl-carousel owl-blog owl-theme">
-
-
-                    @{
-                        foreach (var block in Blog)
-                        {
-                            var content = block.Children;
-                            foreach (Article item in content)
-                            {
-                                var kapakResmi = item.MainImage as MediaWithCrops;
-
-                                <div class="item">
-                                    <a href="@block.Name/@item.UrlSegment">
-                                        <div class="project-card">
-                                            <div class="project-photo">
-                                                <img src="@kapakResmi.Url()" alt="@item.Name">
-                                            </div>
-                                            <div class="project-class">
-                                                @item.Title
-                                            </div>
-                                            <div class="project-body">
-                                                <h4 class="title">@item.Title</h4>
-                                                <div class="text"> @item.Subtitle</div>
-                                                <a href="@block.Name/@item.UrlSegment" class="btn">Detaylı Bilgi <div class="icon"><i class="fas fa-angle-right"></i></div></a>
-                                            </div>
+        <section class="section-blog">
+            <div class="container">
+                <div class="section-header ui-txt-center ui-mb-50px">
+                    <h4 class="title">Sağlıklı Dişler <br> <span>Mutlu Gülüşler</span></h4>
+                </div>
+                <div class="blog">
+                    <div class="blog-carousel js-blog-carousel is-owl owl-nav-style">
+                        <div class="owl-carousel owl-blog owl-theme">
 
 
+                            @{
+                                foreach (var block in Blog)
+                                {
+                                    var content = block.Children;
+                                    foreach (Article item in content)
+                                    {
+                                        var kapakResmi = item.MainImage as MediaWithCrops;
+
+                                        <div class="item">
+                                            <a href="@block.Name/@item.UrlSegment">
+                                                <div class="project-card">
+                                                    <div class="project-photo">
+                                                        <img src="@kapakResmi.Url()" alt="@item.Name">
+                                                    </div>
+                                                    <div class="project-class">
+                                                        @item.Title
+                                                    </div>
+                                                    <div class="project-body">
+                                                        <h4 class="title">@item.Title</h4>
+                                                        <div class="text"> @item.Subtitle</div>
+                                                        <a href="@block.Name/@item.UrlSegment" class="btn">Detaylı Bilgi <div class="icon"><i class="fas fa-angle-right"></i></div></a>
+                                                    </div>
+
+
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
+                                    }
+                                }
                             }
-                        }
-                    }
 
 
 
 
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
+        </section>
+    }}
