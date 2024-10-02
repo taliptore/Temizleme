@@ -11,7 +11,7 @@
     var homePage = Model.AncestorOrSelf<ContentModels.Home>();
 
 
-    var Tedaviler = Model.Children().Where(x => x.Name == "Tedaviler");
+    var Tedaviler = Model.Children().Where(x => x.Name == "Hizmetler");
     // foreach (var block in Tedaviler)
     // {
     //     var content = block.Children;
@@ -38,7 +38,7 @@
          <section class="section-treatments">
     <div class="container">
         <div class="section-header ui-txt-light ui-txt-between ui-right ui-mb-50px">
-            <h4 class="title">Kuzey Ağız ve Diş <br> <span>Kliniği Tedaviler</span></h4>
+            <h4 class="title">Ak  <span>100</span>Temizlme</h4>
             <a href="@Tedaviler.First().Name" class="button ui-btn">Tüm Tedaviler</a>
         </div>
     </div>
@@ -80,7 +80,7 @@
                                             @item.Title
                                         </div>
                                         <div class="project-body">
-                                            <h4 class="title">"@item.Title</h4>
+                                            <h4 class="title">@item.Title</h4>
                                             <div class="text">@item.Subtitle</div>
                                             <a href="@block.Name/@item.UrlSegment" class="btn">Detaylı Bilgi <div class="icon"><i class="fas fa-angle-right"></i></div></a>
                                         </div>
