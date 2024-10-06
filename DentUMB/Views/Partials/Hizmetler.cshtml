@@ -33,85 +33,85 @@
 @{
     if (Tedaviler.Count()>0)
     {
-        
-    
-         <section class="section-treatments">
-    <div class="container">
-        <div class="section-header ui-txt-light ui-txt-between ui-right ui-mb-50px">
-            <h4 class="title">Ak  <span>100</span>Temizlme</h4>
-            <a href="@Tedaviler.First().Name" class="button ui-btn">Tüm Tedaviler</a>
-        </div>
-    </div>
-    <div class="treatments">
-        <div class="treatments-carousel js-treatments-carousel is-owl owl-nav-style top-right">
-            <div class="owl-carousel owl-treatments owl-theme">
-               
 
-                @{
 
-                    foreach (var block in Tedaviler)
-                    {
-                        var content = block.Children;
-                        foreach (Article item in content)
-                        {
-                            var kapakResmi = item.MainImage as MediaWithCrops;
-                            string kate = "";
-                            foreach (var cat in item.Categories)
+        <section class="section-treatments">
+            <div class="container">
+                <div class="section-header ui-txt-light ui-txt-between ui-right ui-mb-50px">
+                    <h4 class="title">Kuzey Ağız ve Diş <br> <span>Kliniği Tedaviler</span></h4>
+                    <a href="@Tedaviler.First().Name" class="button ui-btn">Tüm Tedaviler</a>
+                </div>
+            </div>
+            <div class="treatments">
+                <div class="treatments-carousel js-treatments-carousel is-owl owl-nav-style top-right">
+                    <div class="owl-carousel owl-treatments owl-theme">
+
+
+                        @{
+
+                            foreach (var block in Tedaviler)
                             {
-                                kate += cat.Name;
-                            }
+                                var content = block.Children;
+                                foreach (Article item in content)
+                                {
+                                    var kapakResmi = item.MainImage as MediaWithCrops;
+                                    string kate = "";
+                                    foreach (var cat in item.Categories)
+                                    {
+                                        kate += cat.Name;
+                                    }
 
-                            <div class="item">
-                                <a href="@block.Name/@item.UrlSegment">
-                                    <div class="project-card">
-                                        <div class="project-photo">
-                                            @if (kapakResmi is not null)
-                                            {
-                                                <img src="@kapakResmi.Url()" alt="@item.Title">
-                                                
-                                            }
-                                            else
-                                            {
-                                                <img src="https://www.adalyapi.com/thumb.php?p=uploads/urunler/45e6c.png&w=550" alt=" @item.Title">
-                                            }
-                                            
-                                        </div>
-                                        <div class="project-class">
-                                            @item.Title
-                                        </div>
-                                        <div class="project-body">
-                                            <h4 class="title">@item.Title</h4>
-                                            <div class="text">@item.Subtitle</div>
-                                            <a href="@block.Name/@item.UrlSegment" class="btn">Detaylı Bilgi <div class="icon"><i class="fas fa-angle-right"></i></div></a>
-                                        </div>
+                                    <div class="item">
+                                        <a href="@block.Name/@item.UrlSegment">
+                                            <div class="project-card">
+                                                <div class="project-photo">
+                                                    @if (kapakResmi is not null)
+                                                    {
+                                                        <img src="@kapakResmi.Url()" alt="@item.Title">
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="https://www.adalyapi.com/thumb.php?p=uploads/urunler/45e6c.png&w=550" alt=" @item.Title">
+                                                    }
+
+                                                </div>
+                                                <div class="project-class">
+                                                    @item.Title
+                                                </div>
+                                                <div class="project-body">
+                                                    <h4 class="title">"@item.Title</h4>
+                                                    <div class="text">@item.Subtitle</div>
+                                                    <a href="@block.Name/@item.UrlSegment" class="btn">Detaylı Bilgi <div class="icon"><i class="fas fa-angle-right"></i></div></a>
+                                                </div>
 
 
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
 
+                                }
+                            }
                         }
-                    }
-                }
 
-                @* <div class="item">
-                    <a href="https://www.adalyapi.com/samsun-insaat/kentsel-donusum">
-                        <div class="project-card">
-                            <div class="project-photo">
-                                <img src="https://www.adalyapi.com/thumb.php?p=uploads/urunler/45e6c.png&w=550" alt="Kentsel Dönüşüm">
-                            </div>
-                            <div class="project-class">
-                                Adal Yapı
-                            </div>
-                            <div class="project-body">
-                                <h4 class="title">Kentsel Dönüşüm</h4>
-                                <div class="text">Unkapanı mahallesinde başlatmış olduğumuz kentsel dönüşüm projemiz 7 katlı olup, 145 m2'den oluşan 20 adet deniz manzaralı daireye sahiptir. Projemizin yapımı halen devam etmektedir.</div>
-                                <a href="https://www.adalyapi.com/samsun-insaat/kentsel-donusum" class="btn">Detaylı Bilgi <div class="icon"><i class="fas fa-angle-right"></i></div></a>
-                            </div>
+                        @* <div class="item">
+                <a href="https://www.adalyapi.com/samsun-insaat/kentsel-donusum">
+                <div class="project-card">
+                <div class="project-photo">
+                <img src="https://www.adalyapi.com/thumb.php?p=uploads/urunler/45e6c.png&w=550" alt="Kentsel Dönüşüm">
+                </div>
+                <div class="project-class">
+                Adal Yapı
+                </div>
+                <div class="project-body">
+                <h4 class="title">Kentsel Dönüşüm</h4>
+                <div class="text">Unkapanı mahallesinde başlatmış olduğumuz kentsel dönüşüm projemiz 7 katlı olup, 145 m2'den oluşan 20 adet deniz manzaralı daireye sahiptir. Projemizin yapımı halen devam etmektedir.</div>
+                <a href="https://www.adalyapi.com/samsun-insaat/kentsel-donusum" class="btn">Detaylı Bilgi <div class="icon"><i class="fas fa-angle-right"></i></div></a>
+                </div>
 
 
-                        </div>
-                    </a>
+                </div>
+                </a>
                 </div> *@
 
 
@@ -120,10 +120,10 @@
 
 
 
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
     }
 }

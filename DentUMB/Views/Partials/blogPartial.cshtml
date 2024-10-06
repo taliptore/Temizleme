@@ -55,12 +55,16 @@
                                     foreach (Article item in content)
                                     {
                                         var kapakResmi = item.MainImage as MediaWithCrops;
-
+                                        
                                         <div class="item">
                                             <a href="@block.Name/@item.UrlSegment">
                                                 <div class="project-card">
                                                     <div class="project-photo">
-                                                        <img src="@kapakResmi.Url()" alt="@item.Name">
+                                                        @if (kapakResmi is not null)
+                                                        {
+                                                            <img src="@kapakResmi.Url()" alt="@item.Name">
+
+                                                        }
                                                     </div>
                                                     <div class="project-class">
                                                         @item.Title
